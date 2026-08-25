@@ -1,4 +1,5 @@
 use std::{env, fs, process};
+use std::error::Error;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -6,7 +7,7 @@ fn main() {
         println!("Problem parsing arguments: {err}");
         process::exit(1);
     });
-    
+
     run(config);
 }
 
@@ -34,7 +35,8 @@ fn parse_config(args: &[String]) -> Config {
     Config { query, file_path }
 }
 
-fn run(config: Config) {
+fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path).expect("Should have been able to read the file");
     println!("With text:\n{contents}");
+    Ok(())
 }

@@ -3,12 +3,12 @@ use std::fs;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let (query, file_path) = parse_config(&args);
-
-    let contents = fs::read_to_string(file_path).expect("Should have been able to read the file");
+    let config = parse_config(&args);
+    let contents = fs::read_to_string(config.file_path).expect("Should have been able to read the file");
 
     println!("With text:\n{contents}");
 }
+
 struct Config {
     query: String,
     file_path: String,

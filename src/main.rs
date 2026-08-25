@@ -6,9 +6,8 @@ fn main() {
         println!("Problem parsing arguments: {err}");
         process::exit(1);
     });
-    let contents = fs::read_to_string(config.file_path).expect("Should have been able to read the file");
-
-    println!("With text:\n{contents}");
+    
+    run(config);
 }
 
 struct Config {
@@ -33,4 +32,9 @@ fn parse_config(args: &[String]) -> Config {
     let file_path = args[2].clone();
 
     Config { query, file_path }
+}
+
+fn run(config: Config) {
+    let contents = fs::read_to_string(config.file_path).expect("Should have been able to read the file");
+    println!("With text:\n{contents}");
 }
